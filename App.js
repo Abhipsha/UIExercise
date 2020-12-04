@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Dimensions } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Dimensions, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
+
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
@@ -9,12 +10,19 @@ export default function App() {
         <View style={styles.boxOneOuterStyle}>
           <View style={styles.boxOneInnerStyle}>
             <View style={styles.innerBoxStyle} />
-            <Text style={[styles.textStyle, { textAlignVertical: "center" }]}>Name</Text>
+            <Text style={[styles.textStyle, { fontFamily: Platform.OS === "ios" ? "Helvetica" : "Roboto" }]}>Name</Text>
             <View style={styles.innerBoxStyle} />
           </View>
         </View>
         <View style={styles.boxTwoStyle}>
-          <Text style={[styles.textStyle, { textAlign: "center" }]}>Balance</Text>
+          <Text
+            style={[
+              styles.textStyle,
+              { textAlign: "center", fontFamily: Platform.OS === "ios" ? "Helvetica" : "Roboto" },
+            ]}
+          >
+            Balance
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -45,18 +53,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     borderBottomLeftRadius: 31,
     backgroundColor: "#fff",
+    alignItems: "center",
   },
   boxTwoStyle: {
     flex: 1,
     backgroundColor: "#f4f5fb",
     justifyContent: "center",
     borderTopRightRadius: 31,
-  },
-  boxOneTextStyle: {
-    backgroundColor: "#000",
-    alignSelf: "center",
-    padding: 13,
-    borderRadius: 5,
   },
   innerBoxStyle: {
     backgroundColor: "#000",
@@ -66,8 +69,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "#000",
-    fontWeight: "600",
     fontSize: 16,
-    fontFamily: "",
+    fontFamily: "Roboto",
   },
 });
